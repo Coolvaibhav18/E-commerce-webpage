@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce</title>
+    <link rel="stylesheet" href="../index/index.css">
+</head>
+
+<body>
+    <div id="navbar">
+        <div class="logo">
+            <h2>E-Commerce</h2>
+        </div>
+        <div class="list">
+            <ul>
+                <li><a href="../index/index.html">Home</a></li>
+                <!-- <li><a href="../product/product.html">product</a></li> -->
+                <li><a href="../login/login.html">Login</a></li>
+                <li><a href="../register/Admin&user.html">Register</a></li>
+            </ul>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="Search">
+            <button class="btn">Search</button>
+        </div>
+
+    </div>
+
+    <!-- <div class="form">
+        <form action="">
+            <label for="user"><span>Enter Name</span></label>
+            <input type="text" name="" id="user"> <br>
+
+            <label for="password"><span>Enter Password</span></label>
+            <input type="password" name="" id="password"> <br>
+
+            <button class="formbtn" onclick="login()">Login</button>
+        </form>
+    </div>  -->
+  
+    <div class="mbutton">
+        <h3>Login</h3>
+        <button><a href="../login/alogin.html">Admin</a></button>
+        <button><a href="../login/ulogin.html">User</a></button>
+
+
+    </div>
+
+
+
+    <!-- <script>
+
+        function login() {
+
+            event.preventDefault();
+
+            var username = document.getElementById("user").value;
+            var password = document.getElementById("password").value;
+
+            var users = JSON.parse(localStorage.getItem("users")); //key of data set & get in localstorage
+
+
+            users.forEach(function (user) { //object name
+                if (user.Name == username) {
+                    if (user.Password == password) {
+                        alert("Login Successfull");
+                        window.location.href = "../index/index.html"; //reference to index page after login
+                    }
+                    else {
+                        alert("password Incorrect");
+                    }
+                }
+            })
+
+            window.location.href = "../index/index.html";
+
+
+        }  -->
+
+
+
+    </script>
+</body>
+
+</html>

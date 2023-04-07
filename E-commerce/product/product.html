@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link rel="stylesheet" href="../index/index.css">
+    
+</head>
+
+<body onload="showproduct()">
+    <div id="navbar">
+        <div class="logo">
+            <h2>E-Commerce</h2>
+        </div>
+        <div class="list">
+            <ul>
+                <li><a href="../index/index.html">Home</a></li>
+                <!-- <li><a href="../product/product.html">product</a></li> -->
+                <li><a href="../login/login.html">Login</a></li>
+                <li><a href="../register/Admin&user.html">Register</a></li>
+            </ul>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="Search">
+            <button class="btn">Search</button>
+        </div>
+
+    </div>
+
+
+    <!-- add,update,delete and remove products -->
+
+    <div class="productform">
+        <!-- productid(unique),name ,price ,imageurl ,category , description -->
+        <label for="productid"><span>productid</span></label>
+        <input type="text" id="productid"><br>
+        <label for="price"><span>price</span></label>
+        <input type="number" id="price"><br>
+        <label for="imageurl"><span>Image</span></label>
+        <input type="" id="imageurl"><br>
+        <label for="category"><span>Category</span></label>
+        <input type="text" id="category"><br>
+        <label for="pdescription"><span>Description</span></label>
+        <input type="text" id="pdescription"><br>
+
+        <button class="pbtn" id="addsave" onclick="addproduct()">Add Product</button>
+    </div>
+
+    <div id="show">
+
+    </div>
+
+    <script>
+
+        var products = [];
+        if (localStorage.getItem("products")) {
+            products = JSON.parse(localStorage.getItem("products"));
+        }
+
+        function addproduct() {
+            var productid = document.getElementById("productid").value;
+            var price = document.getElementById("price").value;
+            var image = document.getElementById("imageurl").value;
+            var category = document.getElementById("category").value;
+            var pdescription = document.getElementById("pdescription").value;
+            document.getElementById("productid").value = "";
+            document.getElementById("price").value = "";
+            document.getElementById("imageurl").value = "";
+            document.getElementById("category").value = "";
+            document.getElementById("pdescription").value = "";
+
+            var details = {
+                Productid: productid,
+                Price: price,
+                Image: image,
+                Category: category,
+                Pdescription: pdescription
+            };
+
+            products.push(details);
+            // console.log(products);
+            localStorage.setItem("products", JSON.stringify(products));
+            showproduct();
+        }
+
+        function showproduct() {
+            if (products) {
+                var index = 0;
+                var productlists = "";
+                while (index < products.length) {
+                    const id = index + 1;
+
+                    productlists = productlists + "<div class='data'>" +"<img class='image' src=" + products[index].Image + ">"
+                        +"<span class='price'>"+ 'MRP : ₹  ' + products[index].Price + "</span>" + "<br>"
+                        + "<span class='category'>" + products[index].Category + "</span>" + "<br>"
+                        + "<span class='pdescription'>" + products[index].Pdescription + "</span>" + "<div class='productbtn'>"
+                        + "<button onclick='Delete(" + id + ")'>Delete"
+                        + "<button onclick='update(" + id + ")'>Update" + "</div>" + "</div>";
+                    index++;
+                }
+                document.getElementById("show").innerHTML = productlists;
+            }
+        }
+
+        function Delete(pid) {
+            var index = 0;
+            while (index < products.length) {
+                if (index + 1 == pid) {
+                    products.splice(index, 1);
+                }
+                index++;
+            }
+            localStorage.setItem("products", JSON.stringify(products));
+            showproduct();
+        }
+
+        function update(pid) {
+            var index = 0;
+            while (index < products.length) {
+                if (index + 1 == pid) {
+                    document.getElementById("productid").value = products[index].Productid;
+                    document.getElementById("price").value = products[index].Price;
+                    document.getElementById("imageurl").value = products[index].Image;
+                    document.getElementById("category").value = products[index].Category;
+                    document.getElementById("pdescription").value = products[index].Pdescription;
+                }
+                index++;
+            }
+            localStorage.setItem("products", JSON.stringify(products));
+            localStorage.setItem("products", products);
+            document.getElementById("addsave").innerText = "Save Product";
+            addsave.removeAttribute("onclick");
+            document.getElementById("addsave").setAttribute("onclick", "saveproduct(" + pid + ")");
+
+        }
+
+        function saveproduct(pid) {
+            var UProductid = document.getElementById("productid").value;
+            var UPrice = document.getElementById("price").value;
+            var UImage = document.getElementById("imageurl").value;
+            var UCategory = document.getElementById("category").value;
+            var UPdescription = document.getElementById("pdescription").value;
+
+            index = 0;
+            while (index < products.length) {
+                if (index + 1 == pid) {
+                    products[index].Productid = UProductid;
+                    products[index].Price = UPrice;
+                    products[index].Imageurl = UImage;
+                    products[index].Category = UCategory;
+                    products[index].Pdescription = UPdescription;
+                    break;
+                }
+                index++;
+            }
+            localStorage.setItem("products", JSON.stringify(products));
+            document.getElementById("addsave").innerText = "Add Product";
+            addsave.removeAttribute("onclick");
+            document.getElementById("addsave").setAttribute("click", "addproduct()");
+            document.getElementById("productid").value = "";
+            document.getElementById("price").value = "";
+            document.getElementById("imageurl").value = "";
+            document.getElementById("category").value = "";
+            document.getElementById("pdescription").value = "";
+            showproduct();
+
+        }
+    </script>
+
+
+
+
+
+
+
+</body>
+
+</html>

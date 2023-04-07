@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce</title>
+    <link rel="stylesheet" href="../index/index.css">
+</head>
+
+<body>
+    <div id="navbar">
+        <div class="logo">
+            <h2>E-Commerce</h2>
+        </div>
+        <div class="list">
+            <ul>
+                <li><a href="../index/index.html">Home</a></li>
+                <!-- <li><a href="../product/product.html">product</a></li> -->
+                <li><a href="../login/login.html">Login</a></li>
+                <li><a href="../register/Admin&user.html">Register</a></li>
+            </ul>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="Search">
+            <button class="btn">Search</button>
+        </div>
+
+    </div>
+
+    <div class="form">
+        <form action="">
+             <h3>Admin Register</h3>
+            <label for="user"><span>Name</span> </label>
+            <input type="text" name="" id="user"> <br>
+
+            <label for="password"><span>Enter Password</span></label>
+            <input type="password" name="" id="password"> <br>
+
+            <label for="email"><span>Enter Email</span></label>
+            <input type="email" name="" id="email"><br>
+
+            <button class="formbtn" onclick="register()">Register</button>
+        </form>
+    </div>
+
+    <script>
+
+        if (localStorage.getItem("admin") == null) {  //if localstorage = blank then fetch the user detail previous entered by user
+            admin = JSON.parse(localStorage.getItem("admin"));
+        }
+
+        function register() {
+            event.preventDefault();
+            var username = document.getElementById("user").value;
+            var password = document.getElementById("password").value;
+            var email = document.getElementById("email").value;
+
+
+            var user = {
+                Name: username,
+                Password: password,
+                Email: email
+            }
+            var admin = [];
+            admin.push(user); //pushing user input into the array of users
+            localStorage.setItem("admin", JSON.stringify(admin)); //passing users details into the local storage
+
+            window.location.href = "../login/alogin.html";
+
+        }
+
+
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
